@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Field } from 'src/app/Class/field';
+import { Observable } from 'rxjs'; 
+import { Field } from 'src/app/Interface/field';
 import { FieldService } from 'src/app/Services/field.service';
 
 @Component({

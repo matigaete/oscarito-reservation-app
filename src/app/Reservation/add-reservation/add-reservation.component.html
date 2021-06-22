@@ -1,12 +1,29 @@
-<p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow" *ngFor="let f of (fields$ | async)">
-    
-    <ng-template pTemplate="header">
-        {{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}
-    </ng-template>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-    <ng-template pTemplate="footer">
-        <p-button label="Save" icon="pi pi-check"></p-button>
-        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
-    </ng-template>
-</p-card>
+<div class="p-grid p-flex-column">
+    <div class="p-col">
+        <div class="box"><p>Añadir reserva</p></div>
+    </div>
+    <div class="p-col">
+        <div class="p-grid">
+            <div class="p-col-3" *ngFor="let f of (fields$ | async)">
+                <!-- <div class="box"> -->
+                    <!-- <div class="p-col"> -->
+                        <div class="box box-stretched">
+                            <p-card header="{{f.fieldType?.idType}}" subheader="{{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}" [style]="{width: '360px'}"
+                                styleClass="p-card-shadow">
+                                <ng-template pTemplate="header">
+                                    <img alt="Card" src="assets/deportes/{{f.fieldType?.idType}}.jpg">
+                                </ng-template> 
+                                <ng-template pTemplate="footer">
+                                    <p-button label="Reservar" icon="pi pi-envelope" styleClass="p-button-secondary"></p-button> 
+                                </ng-template>
+                            </p-card>
+                        </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="p-col">
+        <!-- <div class="box">3</div> -->
+    </div>
+</div>
