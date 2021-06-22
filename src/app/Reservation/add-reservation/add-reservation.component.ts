@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs'; 
+import { Observable } from 'rxjs';
 import { Field } from 'src/app/Interface/field';
 import { FieldService } from 'src/app/Services/field.service';
 
@@ -9,16 +9,25 @@ import { FieldService } from 'src/app/Services/field.service';
   styleUrls: ['./add-reservation.component.css']
 })
 export class AddReservationComponent implements OnInit {
- 
-  public fields$: Observable<Field[]>;
 
-  constructor(private fieldService: FieldService) { 
-      this.fields$ = this.fieldService.getFields();
-      this.fields$.forEach(f => console.log(f));
-    }
+  public fields$: Observable<Field[]>;
+  public display: boolean;
+  public date: Date;
+
+  constructor(private fieldService: FieldService) {
+    this.fields$ = this.fieldService.getFields();
+    this.fields$.forEach(f => console.log(f));
+    this.display = false;
+    this.date = new Date();
+  }
 
   ngOnInit(): void {
 
+  }
+
+
+  showDialog() {
+    this.display = true;
   }
 
 }
