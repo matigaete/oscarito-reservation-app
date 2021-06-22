@@ -1,7 +1,7 @@
-<p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow" >
-    <!-- *ngFor="let f of (fields$ | async)"> -->
+<p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow" *ngFor="let f of (fields$ | async)">
+    
     <ng-template pTemplate="header">
-        <p>f.value</p>
+        {{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}
     </ng-template>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
         quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>

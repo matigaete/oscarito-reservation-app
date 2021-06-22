@@ -2,7 +2,7 @@ export class Field {
 
     constructor(private _idState: number,
         private _idType: number,
-        private _value: number,
+        private _amount: number,
         private _idField?: number | undefined) {
     }
     
@@ -12,11 +12,11 @@ export class Field {
     public set idField(value: number | undefined) {
         this._idField = value;
     }
-    public get value_1(): number {
-        return this._value;
+    public get amoun(): number {
+        return this._amount;
     }
-    public set value_1(value: number) {
-        this._value = value;
+    public set amount(value: number) {
+        this._amount = value;
     }
     public get idType(): number {
         return this._idType;

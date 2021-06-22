@@ -13,7 +13,7 @@ export class FieldService {
   constructor(public http: HttpClient) { }  
   
   public getFields() { 
-    return this.http.get<Field[]>(`${this.url}don-oscarito/field/list`);
+    return this.http.get<Field[]>(`${this.url}field/list`);
   }
 
   public addField(field: Field) {
