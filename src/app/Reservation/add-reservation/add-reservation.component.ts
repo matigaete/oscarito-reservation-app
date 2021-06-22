@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Field } from 'src/app/Class/field';
+import { FieldService } from 'src/app/Services/field.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-reservation.component.css']
 })
 export class AddReservationComponent implements OnInit {
+ 
+  public fields$: Observable<Field[]>;
 
-  constructor() { }
+  constructor(private fieldService: FieldService) { 
+      this.fields$ = this.fieldService.getFields();
+      this.fields$.forEach(f => console.log(f));
+    }
 
   ngOnInit(): void {
+
   }
 
 }
