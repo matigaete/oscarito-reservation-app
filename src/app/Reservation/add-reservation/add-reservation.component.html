@@ -15,22 +15,26 @@
                             <img alt="Card" src="assets/deportes/{{f.fieldType?.idFieldType}}.jpg">
                         </ng-template>
                         <ng-template pTemplate="footer">
-                            <p-button (click)="showDialog()" label="Reservar" icon="pi pi-envelope"
-                                styleClass="p-button-secondary"></p-button>
-                            <p-dialog header="Header" [(visible)]="display" [style]="{width: '50vw'}"
-                                [baseZIndex]="10000">
-                                <h5>Inline</h5>
-                                <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true"></p-calendar>
-                                <ng-template pTemplate="footer">
-                                    <p-button icon="pi pi-check" (click)="display=false" label="Yes"
-                                        styleClass="p-button-text"></p-button>
-                                    <p-button icon="pi pi-times" (click)="display=false" label="No"></p-button>
-                                </ng-template>
-                            </p-dialog>
+                            <!--Abrir modal disponibilidad-->
+                            <p-button (click)="showDialog(f)" label="Reservar" icon="pi pi-envelope"
+                                styleClass="p-button-secondary"></p-button>                            
                         </ng-template>
                     </p-card>
                 </div>
             </div>
+
+            <!-- Modal disponibilidad -->
+            <p-dialog header="Disponibilidad" [(visible)]="display" [style]="{width: '50vw'}"
+                [baseZIndex]="10000">
+                <h5>Inline</h5>
+                <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true"></p-calendar>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-check" (click)="display=false" label="Yes"
+                        styleClass="p-button-text"></p-button>
+                    <p-button icon="pi pi-times" (click)="display=false" label="No"></p-button>
+                </ng-template>
+            </p-dialog>
+
         </div>
     </div>
     <div class="p-col">

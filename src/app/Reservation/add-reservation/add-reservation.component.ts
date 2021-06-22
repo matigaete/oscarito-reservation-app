@@ -26,7 +26,8 @@ export class AddReservationComponent implements OnInit {
   }
 
 
-  showDialog() {
+  showDialog(param:Field) {
+    console.log(param);
     this.display = true;
   }
 
