@@ -15,13 +15,15 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 
 import { FieldService } from './Services/field.service';
+import { ImageResourcePipe } from './pipes/image-resource.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddReservationComponent,
     CancelReservationComponent,
-    UpdateReservationComponent
+    UpdateReservationComponent,
+    ImageResourcePipe
   ],
   imports: [
     HttpClientModule,

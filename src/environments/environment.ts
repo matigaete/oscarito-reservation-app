@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:4800/don-oscarito/api/"
+  baseUrl: "http://localhost:4800/don-oscarito/api/",
+  imageFolder: "assets\\deportes\\"
 };
 
 /*
