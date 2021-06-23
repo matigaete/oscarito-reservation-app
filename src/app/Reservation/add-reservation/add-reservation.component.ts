@@ -14,6 +14,8 @@ export class AddReservationComponent implements OnInit {
   public display: boolean;
   public date: Date;
 
+  
+
   constructor(private fieldService: FieldService) {
     this.fields$ = this.fieldService.getFields();
     this.fields$.forEach(f => console.log(f));
