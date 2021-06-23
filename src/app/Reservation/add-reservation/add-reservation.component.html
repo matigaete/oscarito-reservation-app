@@ -12,7 +12,7 @@
                         subheader="{{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}" [style]="{width: '360px'}"
                         styleClass="p-card-shadow">
                         <ng-template pTemplate="header">
-                            <img alt="Card" src="{{ f.idField | imageResource }}">
+                            <img alt="Card" src="{{ f.idField | imageResource }}" style="width: fit-content;">
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <!--Abrir modal disponibilidad-->

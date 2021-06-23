@@ -8,9 +8,12 @@ import { environment } from 'src/environments/environment';
 export class ImageResourcePipe implements PipeTransform {
 
   private imagesName = [
-    environment.imageFolder + "1.jpg", 
-    environment.imageFolder + "2.jpg",
-    environment.imageFolder + "3.jpg"
+    environment.imageFolder + "1_Tenis.png", 
+    environment.imageFolder + "2_Futbol7.png",
+    environment.imageFolder + "3_Futbol5.png",
+    environment.imageFolder + "4_Futbol11.png",
+    environment.imageFolder + "5_Voleyball.png",
+    environment.imageFolder + "6_Basquetbol.png"
   ];
 
   transform(id? : number): string {
