@@ -16,13 +16,10 @@ export class ImageResourcePipe implements PipeTransform {
     environment.imageFolder + "6_Basquetbol.png"
   ];
 
-  transform(id? : number): string {
-    if(id == undefined)
-      return "";
-    var image : string | undefined = this.imagesName.find((v,i) => i == id-1)?.toString();
-    
-    if(image == undefined)
-      return "";
+  transform(id? : number): string { 
+    var image : string | undefined;
+    id == undefined ? image = "" : image = this.imagesName.find((v,i) => i == id-1)?.toString();
+    image == undefined ? image = "" : image; 
     return image;
   }
 

@@ -13,6 +13,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button'; 
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
+import { ListboxModule } from 'primeng/listbox';
 
 import { FieldService } from './Services/field.service';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -33,7 +34,8 @@ import { ImageResourcePipe } from './pipes/image-resource.pipe';
     ButtonModule,  
     DialogModule,
     CalendarModule,
-    FormsModule
+    FormsModule,
+    ListboxModule
   ],
   providers: [FieldService],
   bootstrap: [AppComponent]

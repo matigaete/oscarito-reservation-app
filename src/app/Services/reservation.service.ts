@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Reservation } from '../Class/reservation';
+import { Reservation } from '../Interface/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ReservationService {
   }
 
   public addReservation(reservation: Reservation) {
-    return this.http.post(`${this.url}(link para API)`, reservation);
+    return this.http.post(`${this.url}reservation/add`, reservation);
   }
 
   public updateReservation(reservation: Reservation) {

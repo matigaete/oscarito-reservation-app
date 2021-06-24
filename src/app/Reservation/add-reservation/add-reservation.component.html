@@ -12,7 +12,7 @@
                         subheader="{{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}" [style]="{width: '360px'}"
                         styleClass="p-card-shadow">
                         <ng-template pTemplate="header">
-                            <img alt="Card" src="{{ f.idField | imageResource }}" style="width: fit-content;">
+                            <img alt="Card" src="{{ f.fieldType.idFieldType | imageResource }}" style="width: fit-content;">
                         </ng-template>
                         <ng-template pTemplate="footer">
                             <!--Abrir modal disponibilidad-->
@@ -25,13 +25,13 @@
 
             <!-- Modal disponibilidad -->
             <p-dialog header="Disponibilidad" [(visible)]="display" [style]="{width: '50vw'}"
-                [baseZIndex]="10000">
-                <h5>Inline</h5>
-                <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true"></p-calendar>
+                [baseZIndex]="10000"> 
+                <p-calendar [(ngModel)]="dateModel" [inline]="true" [showWeek]="true" [minDate]="dateMin" [maxDate]="dateMax"></p-calendar>
+                <h5>Bloques disponibles</h5>
+                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" optionLabel="initTime" [style]="{'width':'15rem'}"></p-listbox>
                 <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-check" (click)="display=false" label="Yes"
-                        styleClass="p-button-text"></p-button>
-                    <p-button icon="pi pi-times" (click)="display=false" label="No"></p-button>
+                    <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
+                    <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>
                 </ng-template>
             </p-dialog>
 
