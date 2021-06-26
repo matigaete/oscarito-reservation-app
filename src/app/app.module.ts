@@ -12,6 +12,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { APP_ROUTING } from './app.routes';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -22,6 +23,7 @@ import { UpdateReservationComponent } from './components/reservation/update-rese
 /* SERVICIOS */
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ConfirmationService } from 'primeng/api';
     CancelReservationComponent,
     UpdateReservationComponent,
     ImageResourcePipe,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     HttpClientModule,
@@ -43,7 +46,8 @@ import { ConfirmationService } from 'primeng/api';
     FormsModule,
     ListboxModule,
     MessagesModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService],
   bootstrap: [AppComponent]
