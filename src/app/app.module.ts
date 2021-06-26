@@ -15,7 +15,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
-//import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { AddReservationComponent } from './components/reservation/add-reservation/add-reservation.component';
 import { CancelReservationComponent } from './components/reservation/cancel-reservation/cancel-reservation.component';
 import { UpdateReservationComponent } from './components/reservation/update-reservation/update-reservation.component';
@@ -30,7 +30,7 @@ import { ConfirmationService } from 'primeng/api';
     CancelReservationComponent,
     UpdateReservationComponent,
     ImageResourcePipe,
-    //LoginComponent
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
