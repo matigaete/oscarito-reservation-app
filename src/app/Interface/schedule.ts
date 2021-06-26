@@ -2,7 +2,7 @@ import { Field } from "./field";
 
 export interface Schedule {
     idSchedule: number,
-    field?: Field,
+    idField?: number,
     date?: Date,
     initTime?: Date,
     finalTime?: Date,

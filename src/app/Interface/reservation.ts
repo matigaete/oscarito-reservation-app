@@ -1,9 +1,8 @@
 export interface Reservation {
     idUser: number,
     date: Date,
-    idPayment: number,
+    idBlock: number,
     idState: number,
-    initTime: number,
-    finalTime: number,
+    idPayment?: number, 
     idField?: number | undefined
 }

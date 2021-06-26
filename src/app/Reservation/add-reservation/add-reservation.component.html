@@ -26,9 +26,11 @@
             <!-- Modal disponibilidad -->
             <p-dialog header="Disponibilidad" [(visible)]="display" [style]="{width: '50vw'}"
                 [baseZIndex]="10000"> 
-                <p-calendar [(ngModel)]="dateModel" [inline]="true" [showWeek]="true" [minDate]="dateMin" [maxDate]="dateMax"></p-calendar>
+                <p-calendar [(ngModel)]="dateModel" [inline]="true" [minDate]="dateMin" [maxDate]="dateMax"
+                (onSelect)="onSelect(fieldModel)"></p-calendar>
                 <h5>Bloques disponibles</h5>
-                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" optionLabel="initTime" [style]="{'width':'15rem'}"></p-listbox>
+                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" optionLabel="initTime" [style]="{'width':'15rem'}"
+                emptyMessage="No hay horas disponibles"></p-listbox>
                 <ng-template pTemplate="footer">
                     <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
                     <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>

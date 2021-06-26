@@ -1,5 +1,4 @@
-import { JsonpClientBackend } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
 import { Observable } from 'rxjs';
 import { Field } from 'src/app/Interface/field';
 import { Reservation } from 'src/app/Interface/reservation';
@@ -16,30 +15,30 @@ import { ScheduleService } from 'src/app/Services/schedule.service';
 export class AddReservationComponent implements OnInit {
 
   public fields$: Observable<Field[]>;
-  public schedules$: Observable<Schedule[]>;
+  public schedules$: Observable<Schedule[]> | undefined;
   public schedules: Schedule[];
 
-  public fieldModel: Field | undefined;
+  public fieldModel: Field;
   public reservationModel: Reservation;
+  public scheduleModel: Schedule;
+
   public display: boolean;
   public dateModel: Date;
   public dateMin: Date;
   public dateMax: Date;
 
-  public scheduleModel: Schedule;
-
   constructor(private fieldService: FieldService,
     private scheduleService: ScheduleService,
     private reservartionService: ReservationService) {
+
     this.fields$ = this.fieldService.getFields();
-    this.schedules$ = this.scheduleService.getSchedules();
+    this.fieldModel = { idState: 0, fieldType: { capacity: 0, name: "" }, amount: 0 };
     this.display = false;
-    this.reservationModel = { initTime: 0, idState: 0, finalTime: 0, date: new Date(), idPayment: 0, idUser: 0 };
+    this.reservationModel = { idBlock: 0, idState: 0, date: new Date(), idPayment: 0, idUser: 0 };
     this.dateModel = this.dateMin = new Date();
     this.dateMax = new Date();
     this.dateMax.setDate(this.dateMin.getDate() + 7);
     this.schedules = [];
-    this.scheduleService.getSchedules().subscribe((json: Schedule[]) => this.schedules = json);
     this.scheduleModel = this.schedules[1];
   }
 
@@ -47,26 +46,37 @@ export class AddReservationComponent implements OnInit {
 
   }
 
-  ngOnSubmit(): void {
+  ngOnSubmit(): void {  
     this.display = false;
     this.reservationModel = {
       idField: this.fieldModel?.idField,
-      date: this.dateModel, 
-      idUser: 1, 
-      idPayment : 1, 
-      idState : 1, 
-      initTime : this.scheduleModel.idSchedule, 
-      finalTime : 0
+      date: this.dateModel,
+      idUser: 1,
+      idState: 1,
+      idBlock: this.scheduleModel.idSchedule,
     };
+    this.scheduleModel.available = false;
     this.reservartionService.addReservation(this.reservationModel).subscribe(() => {
-      // mensaje de reserva exitosa
+      this.scheduleService.updateSchedule(this.scheduleModel).subscribe(() => {
+        // mensaje de reserva exitosa
+      });
     });
-    console.log(this.reservationModel);
   }
 
-  showDialog(param: Field) {
-    this.fieldModel = param;
+  onSelect(field: Field): void {
+    this.showSchedules(field); 
+  }
+
+  showDialog(field: Field) {
+    this.showSchedules(field);
+    this.fieldModel = field;
     this.display = true;
+  }
+
+  showSchedules(field: Field): void {
+    let dateString = `${this.dateModel.getFullYear()}-${this.dateModel.getMonth()+1}-${this.dateModel.getDate()}`
+    this.schedules$ = this.scheduleService.getSchedules(field.idField, dateString);
+    this.schedules$.forEach(s => { this.schedules = s }); 
   }
 
 }

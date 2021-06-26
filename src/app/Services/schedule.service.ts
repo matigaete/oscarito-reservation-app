@@ -12,8 +12,8 @@ export class ScheduleService {
 
   constructor(private http: HttpClient) { }  
   
-  public getSchedules() {
-    return this.http.get<Schedule[]>(`${this.url}schedule/list1/true`);
+  public getSchedules(idField: number | undefined, date : string) {
+    return this.http.get<Schedule[]>(`${this.url}schedule/list/${idField}/${date}/true`);
   }
 
   public addSchedule(schedule: Schedule) {
@@ -21,6 +21,6 @@ export class ScheduleService {
   }
 
   public updateSchedule(schedule: Schedule) {
-    return this.http.put(`${this.url}(link para API)`, schedule);
+    return this.http.put(`${this.url}schedule/update`, schedule);
   }
 }
