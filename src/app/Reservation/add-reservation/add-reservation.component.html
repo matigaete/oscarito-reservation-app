@@ -1,7 +1,8 @@
 <div class="p-grid p-flex-column">
     <div class="p-col">
         <div class="box">
-            <p>Añadir reserva</p>
+            <div class="p-text-center" ><h2>Añadir reserva</h2></div>
+            <i class="pi pi-check"></i>
         </div>
     </div>
     <div class="p-col">
@@ -36,10 +37,10 @@
                     <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>
                 </ng-template>
             </p-dialog>
-
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+            <p-messages [value]="msgs" [style]="{width: '20vw'}"></p-messages>
         </div>
     </div>
     <div class="p-col">
-        <!-- <div class="box">3</div> -->
     </div>
 </div>

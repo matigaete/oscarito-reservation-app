@@ -14,9 +14,12 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { FieldService } from './Services/field.service';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -35,9 +38,11 @@ import { ImageResourcePipe } from './pipes/image-resource.pipe';
     DialogModule,
     CalendarModule,
     FormsModule,
-    ListboxModule
+    ListboxModule,
+    MessagesModule,
+    ConfirmDialogModule
   ],
-  providers: [FieldService],
+  providers: [FieldService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
