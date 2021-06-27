@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 
@@ -9,7 +10,8 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   //Items para menubar
@@ -43,7 +45,13 @@ export class NavbarComponent implements OnInit {
           visible: this.authService.isAuthenticated(),
           items: [
             {label: 'Perfil'},
-            {label: 'Salir'}
+            {label: 'Salir', command: () => {
+              this.authService.logout();
+              window.location.hash = '';
+              this.router.navigateByUrl('/home').then(() => {
+                window.location.reload();
+              });
+            }}
           ]
       }
     ];

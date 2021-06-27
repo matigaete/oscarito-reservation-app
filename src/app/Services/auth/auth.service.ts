@@ -27,6 +27,10 @@ export class AuthService {
     );
   }
 
+  public logout(){
+    localStorage.removeItem('user');
+  }
+
   public isAuthenticated(): boolean {
     let user = this.getLocalUser();
     if(user == undefined){
