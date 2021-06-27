@@ -1,5 +1,3 @@
-import { Field } from "./field";
-
 export interface Schedule {
     idSchedule: number,
     idField?: number,

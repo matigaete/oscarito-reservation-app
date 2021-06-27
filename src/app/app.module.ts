@@ -3,16 +3,23 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { APP_ROUTING } from './app.routes';
 /* MÓDULOS PRIMEFACES */
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from "primeng/inputtext";
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from "primeng/button";
 import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button'; 
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { APP_ROUTING } from './app.routes';
+import { MenubarModule } from 'primeng/menubar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BlockUIModule } from 'primeng/blockui';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -23,7 +30,7 @@ import { UpdateReservationComponent } from './components/reservation/update-rese
 /* SERVICIOS */
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
-import { HomeComponent } from './components/home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -33,13 +40,16 @@ import { HomeComponent } from './components/home/home.component';
     UpdateReservationComponent,
     ImageResourcePipe,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     CardModule,
+    InputTextModule,
+    PasswordModule,
     ButtonModule,  
     DialogModule,
     CalendarModule,
@@ -47,6 +57,9 @@ import { HomeComponent } from './components/home/home.component';
     ListboxModule,
     MessagesModule,
     ConfirmDialogModule,
+    MenubarModule,
+    ProgressSpinnerModule,
+    BlockUIModule,
     APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService],

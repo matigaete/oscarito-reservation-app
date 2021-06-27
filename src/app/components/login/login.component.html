@@ -1,0 +1,17 @@
+<div class="card">
+    <h2>Don Oscarito</h2>
+    <div class="p-fluid">
+        <div class="p-field">
+            <label for="txtEmail">Email</label>
+            <input id="txtEmail" type="text" [(ngModel)]="email" pInputText />
+        </div>
+        <div class="p-field">
+            <label for="txtPassword">Clave</label>
+            <p-password id="txtPassword" [(ngModel)]="password" [feedback]="false" [toggleMask]="true"></p-password>
+        </div>
+        <button pButton type="button" label="Ingresar" (click)="ingresar()"></button>
+    </div>
+</div>
+<p-blockUI [blocked]="blockedDocument"></p-blockUI>
+<p-messages [value]="msgs" [style]="{width: '20vw'}"></p-messages>
+<p-progressSpinner *ngIf="authService.isAuthenticated()"></p-progressSpinner>
