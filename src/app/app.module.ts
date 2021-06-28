@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { APP_ROUTING } from './app.routes';
 /* MÓDULOS PRIMEFACES */
 import { FormsModule } from '@angular/forms';
@@ -20,6 +18,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BlockUIModule } from 'primeng/blockui';
+import { TableModule } from 'primeng/table';
+import { DividerModule } from 'primeng/divider';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -27,9 +27,14 @@ import { LoginComponent } from './components/login/login.component';
 import { AddReservationComponent } from './components/reservation/add-reservation/add-reservation.component';
 import { CancelReservationComponent } from './components/reservation/cancel-reservation/cancel-reservation.component';
 import { UpdateReservationComponent } from './components/reservation/update-reservation/update-reservation.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ListReservationComponent } from './components/reservation/list-reservation/list-reservation.component';
 /* SERVICIOS */
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+
 
 
 @NgModule({
@@ -41,7 +46,8 @@ import { ConfirmationService } from 'primeng/api';
     ImageResourcePipe,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListReservationComponent
   ],
   imports: [
     HttpClientModule,
@@ -60,9 +66,11 @@ import { ConfirmationService } from 'primeng/api';
     MenubarModule,
     ProgressSpinnerModule,
     BlockUIModule,
+    TableModule,
+    DividerModule,
     APP_ROUTING
   ],
-  providers: [FieldService, ConfirmationService],
+  providers: [FieldService, ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

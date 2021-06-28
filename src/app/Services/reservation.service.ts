@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Reservation } from '../Interface/reservation';
+import { ReservationUpdate } from '../Interface/reservation-update';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,19 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }  
   
-  public getReservation() {
-    return this.http.get<Reservation[]>(`${this.url}(link para API)`);
+  public getReservation(idUser: number) {
+    return this.http.get<Reservation[]>(`${this.url}reservation/list/{idUser}?idUser=${idUser}`);
   }
 
   public addReservation(reservation: Reservation) {
     return this.http.post(`${this.url}reservation/add`, reservation);
   }
 
-  public updateReservation(reservation: Reservation) {
-    return this.http.put(`${this.url}(link para API)`, reservation);
+  public updateReservation(reservationUpdate: ReservationUpdate) {
+    return this.http.patch(`${this.url}reservation/update`, reservationUpdate);
+  }
+
+  public cancelReservation(reservation: Reservation) {
+    return this.http.put(`${this.url}reservation/cancel`, reservation);
   }
 }
