@@ -20,6 +20,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BlockUIModule } from 'primeng/blockui';
 import { TableModule } from 'primeng/table';
 import { DividerModule } from 'primeng/divider';
+import { InputSwitchModule } from 'primeng/inputswitch';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -68,6 +69,7 @@ import { MessageService } from 'primeng/api';
     BlockUIModule,
     TableModule,
     DividerModule,
+    InputSwitchModule,
     APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService, MessageService],

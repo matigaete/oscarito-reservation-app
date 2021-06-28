@@ -41,6 +41,11 @@ export class AuthService {
     }
   }
 
+  public updateUserLocal(user : User){
+    localStorage.removeItem('user');
+    this.saveLocalUser(user);
+  }
+
   public getLocalUser() : User | undefined{
     let user : User | undefined;
     let userLocal = localStorage.getItem('user');
