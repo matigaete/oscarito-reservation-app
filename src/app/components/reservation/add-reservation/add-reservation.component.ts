@@ -18,7 +18,7 @@ export class AddReservationComponent implements OnInit {
   msgs: Message[] = [];
   fields$: Observable<Field[]>;
   schedules$: Observable<Schedule[]> | undefined;
-  schedules: Schedule[] = [];;
+  schedules: Schedule[] = [];
 
   fieldModel: Field = { idState: 0, fieldType: { capacity: 0, name: "" }, amount: 0 };
   reservationModel: Reservation = { idBlock: 0, idState: 0, date: new Date(), idPayment: 0, idUser: 0 };

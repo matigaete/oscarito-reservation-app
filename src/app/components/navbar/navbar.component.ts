@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
         visible: this.authService.isAuthenticated(),
         items: [
           {label: 'Solicitar', routerLink: ['/reservar']},
-          {label: 'Ver'}
+          {label: 'Ver', routerLink: ['/verReservas']} 
         ]
       },
       {

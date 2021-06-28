@@ -1,0 +1,65 @@
+<p-card>
+    <p-table [value]="reservations" [rows]="10" [paginator]="true" [globalFilterFields]="['payment.method','state.description','field.fieldType.name','schedule.date']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Administrar reservas</h5>
+            </div>
+        </ng-template>
+    
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Deporte</th>
+                <th>Fecha de solicitud</th>
+                <th>Fecha de reserva</th>
+                <th>Bloque horario</th>
+                <th>Valor</th>
+                <th>Método de pago</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </ng-template>
+    
+        <ng-template pTemplate="body" let-reservation>
+            <tr>
+                <td>{{reservation.field.fieldType.name}}</td>
+                <td>{{reservation.date}}</td>
+                <td>{{reservation.schedule.date}}</td>
+                <td>{{reservation.schedule.initTime}} a {{reservation.schedule.finalTime}}</td>
+                <td>{{reservation.field.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}</td>
+                <td>{{ (reservation.payment !== null) ? reservation.payment.method : "sin pago"}}</td>
+                <td>{{reservation.state.description}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 2" (click)="editReservation(reservation)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" *ngIf="reservation.payment === null && reservation.state.idState !== 2" (click)="cancelReservation(reservation)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Posee {{reservations ? reservations.length : 0 }} reservas.
+            </div>
+        </ng-template>    
+    </p-table>
+</p-card>
+
+<p-dialog [(visible)]="reservationDialog" [style]="{width: '450px'}" header="Modificar bloque horario" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <h5>Bloque actual</h5>
+        {{reservationSelected.schedule.initTime}} - {{reservationSelected.schedule.finalTime}}
+        <p-divider></p-divider>
+        <h5>Bloques disponibles</h5>
+        <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" [style]="{'width':'15rem'}" emptyMessage="No hay horas disponibles">
+            <ng-template let-schedule pTemplate="item">
+                <div class="schedule-item">
+                    <div>{{schedule.initTime}} - {{schedule.finalTime}}</div>
+                </div>
+            </ng-template>
+        </p-listbox>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Modificar" icon="pi pi-check" class="p-button-text" (click)="saveReservation()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
