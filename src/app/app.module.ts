@@ -1,25 +1,36 @@
+/* MÓDULOS */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { APP_ROUTING } from './app.routes';
+/* MÓDULOS PRIMEFACES */
 import { FormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { AddReservationComponent } from './Reservation/add-reservation/add-reservation.component';
-import { CancelReservationComponent } from './Reservation/cancel-reservation/cancel-reservation.component';
-import { UpdateReservationComponent } from './Reservation/update-reservation/update-reservation.component';
-
+import { InputTextModule } from "primeng/inputtext";
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from "primeng/button";
 import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button'; 
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
-import { FieldService } from './Services/field.service';
+import { MenubarModule } from 'primeng/menubar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BlockUIModule } from 'primeng/blockui';
+/* COMPONENTES */
+import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { AddReservationComponent } from './components/reservation/add-reservation/add-reservation.component';
+import { CancelReservationComponent } from './components/reservation/cancel-reservation/cancel-reservation.component';
+import { UpdateReservationComponent } from './components/reservation/update-reservation/update-reservation.component';
+/* SERVICIOS */
+import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -27,20 +38,29 @@ import { ConfirmationService } from 'primeng/api';
     AddReservationComponent,
     CancelReservationComponent,
     UpdateReservationComponent,
-    ImageResourcePipe
+    ImageResourcePipe,
+    LoginComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     CardModule,
+    InputTextModule,
+    PasswordModule,
     ButtonModule,  
     DialogModule,
     CalendarModule,
     FormsModule,
     ListboxModule,
     MessagesModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MenubarModule,
+    ProgressSpinnerModule,
+    BlockUIModule,
+    APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService],
   bootstrap: [AppComponent]
