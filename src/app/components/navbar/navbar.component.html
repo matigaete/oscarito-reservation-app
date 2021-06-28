@@ -1,1 +1,44 @@
 <p-menubar [model]="items"></p-menubar>
+
+<p-dialog [(visible)]="perfilDialog" [style]="{width: '450px'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="header">
+        <h5>Editar</h5>
+        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <h5>Información personal</h5>
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-12 p-lg-12">
+                <span>Nombre</span>
+                <input type="text" pInputText [readonly]="!checked" [(ngModel)]="userConnect.name">      
+            </div>
+            
+            <div class="p-col-12 p-md-12 p-lg-12">
+                <span>Apellido</span>
+                <input type="text" pInputText [readonly]="!checked" [(ngModel)]="userConnect.lastName">      
+            </div>
+        </div>
+    
+        <p-divider></p-divider>
+    
+        <h5>Contacto</h5>
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-12 p-lg-12">
+                <span>Teléfono</span>
+                <input type="text" pInputText [readonly]="!checked" [(ngModel)]="userConnect.phone">      
+            </div>
+            <div class="p-col-12 p-md-12 p-lg-12">
+                <span>Email</span>
+                <input type="text" pInputText [readonly]="true" [(ngModel)]="userConnect.email">      
+            </div>
+        </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Modificar" icon="pi pi-check" class="p-button-text" *ngIf="checked" (click)="editUser()"></button>
+    </ng-template>
+
+    <p-messages [value]="msgs" [style]="{width: '20vw'}"></p-messages>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</p-dialog>
