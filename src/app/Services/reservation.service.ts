@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Reservation } from '../Interface/reservation';
-import { ReservationUpdate } from '../Interface/reservation-update';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class ReservationService {
     return this.http.post(`${this.url}reservation/add`, reservation);
   }
 
-  public updateReservation(reservationUpdate: ReservationUpdate) {
+  public updateReservation(reservationUpdate: Reservation) {
     return this.http.patch(`${this.url}reservation/update`, reservationUpdate);
   }
 

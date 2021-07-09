@@ -8,7 +8,6 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Schedule } from 'src/app/Interface/schedule';
 import { ScheduleService } from 'src/app/Services/schedule.service';
-import { ReservationUpdate } from 'src/app/Interface/reservation-update';
 
 @Component({
   selector: 'app-list-reservation',
@@ -57,13 +56,7 @@ export class ListReservationComponent implements OnInit {
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-          let reservationToCancel : Reservation = {
-            date: reservation.date,
-            idField: reservation.idField,
-            idBlock: reservation.idBlock,
-            idUser: reservation.idUser
-          };
-          this.reservationService.cancelReservation(reservationToCancel).subscribe();
+          this.reservationService.cancelReservation(reservation).subscribe();
           this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
           this.reload();
       }
@@ -73,7 +66,7 @@ export class ListReservationComponent implements OnInit {
   editReservation(reservation: Reservation) {
     this.reservationSelected = {...reservation};
     let dateString = reservation.schedule!.date!.toString();
-    this.scheduleService.getSchedules(reservation.idField!, dateString!)
+    this.scheduleService.getSchedules(reservation.idReservation, dateString!)
     .subscribe((value) => {
       this.schedules = value;
     });
@@ -87,24 +80,13 @@ export class ListReservationComponent implements OnInit {
   }
 
   saveReservation(){
-    let reservationToUpdate: ReservationUpdate = { 
-      reservation: {
-        date: this.reservationSelected.date,
-        idField: this.reservationSelected.idField,
-        idBlock: this.reservationSelected.idBlock,
-        idUser: this.reservationSelected.idUser
-      },
-      schedule: this.scheduleModel
-    }
-
-    console.log("res to upd", reservationToUpdate);
-
+    let reservationToUpdate: Reservation = this.reservationSelected; 
+    reservationToUpdate.idBlock = this.scheduleModel.idSchedule;
     this.reservationService.updateReservation(reservationToUpdate).subscribe();
-
     this.reservationSelected = null;
     this.schedules = [];
     this.reservationDialog = false;
-    //this.reload();
+    this.reload();
   }
 
   reload(){

@@ -21,7 +21,7 @@ export class AddReservationComponent implements OnInit {
   schedules: Schedule[] = [];
 
   fieldModel: Field = { idState: 0, fieldType: { capacity: 0, name: "" }, amount: 0 };
-  reservationModel: Reservation = { idBlock: 0, idState: 0, date: new Date(), idPayment: 0, idUser: 0 };
+  reservationModel: Reservation = { idReservation : 0 ,date: new Date(), idUser: 0, idBlock: 0 };
   scheduleModel: Schedule;
 
   display: boolean = false;
@@ -52,11 +52,13 @@ export class AddReservationComponent implements OnInit {
       accept: () => {
         this.display = false;
         this.reservationModel = {
-          idField: this.fieldModel?.idField,
+          idReservation : 0,
+          field: this.fieldModel,
           date: this.dateModel,
-          idUser: 1,
-          idState: 1,
           idBlock: this.scheduleModel.idSchedule,
+          idUser: 1,
+          state: {idState : 1, description : "" },
+          schedule: this.scheduleModel,
         };
         this.scheduleModel.available = false;
         this.reservartionService.addReservation(this.reservationModel).subscribe(() => {

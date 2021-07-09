@@ -5,14 +5,13 @@ import { StateReservation } from "./reservation-state";
 import { Schedule } from "./schedule";
 
 export interface Reservation {
+    idReservation?: number,
     idUser: number,
     date: Date,
-    idBlock: number,
-    idState?: number | undefined,
-    idPayment?: number, 
-    idField?: number | undefined,
+    idBlock: number | undefined,
     field?: Field | undefined,
     payment?: Payment | undefined,
     state?: StateReservation | undefined,
     schedule?: Schedule | undefined
 }
+ 
