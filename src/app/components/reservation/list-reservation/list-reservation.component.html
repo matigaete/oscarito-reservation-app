@@ -36,7 +36,7 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-                Posee {{reservations ? reservations.length : 0 }} reservas.
+                Tienes {{reservations ? reservations.length : 0 }} reservas.
             </div>
         </ng-template>    
     </p-table>
@@ -58,7 +58,7 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Modificar" icon="pi pi-check" class="p-button-text" (click)="saveReservation()"></button>
+        <button pButton pRipple label="Modificar" icon="pi pi-check" class="p-button-text" (click)="saveNewScheduleForReservation()"></button>
     </ng-template>
 </p-dialog>
 

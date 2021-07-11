@@ -66,27 +66,26 @@ export class ListReservationComponent implements OnInit {
   editReservation(reservation: Reservation) {
     this.reservationSelected = {...reservation};
     let dateString = reservation.schedule!.date!.toString();
-    this.scheduleService.getSchedules(reservation.idReservation, dateString!)
+    this.scheduleService.getSchedules(reservation.field?.idField, dateString!)
     .subscribe((value) => {
       this.schedules = value;
     });
 
     this.reservationDialog = true;
+  }  
+
+  saveNewScheduleForReservation(){
+    let reservationToUpdate: Reservation = this.reservationSelected; 
+    reservationToUpdate.idBlock = this.scheduleModel.idSchedule;this.reservationService.updateReservation(reservationToUpdate).subscribe();
+    this.reservationSelected = null;
+    this.schedules = [];
+    this.reservationDialog = false;
+    this.reload();
   }
 
   hideDialog(){
     this.schedules = [];
     this.reservationDialog = false;
-  }
-
-  saveReservation(){
-    let reservationToUpdate: Reservation = this.reservationSelected; 
-    reservationToUpdate.idBlock = this.scheduleModel.idSchedule;
-    this.reservationService.updateReservation(reservationToUpdate).subscribe();
-    this.reservationSelected = null;
-    this.schedules = [];
-    this.reservationDialog = false;
-    this.reload();
   }
 
   reload(){
