@@ -30,8 +30,13 @@
                 <p-calendar [(ngModel)]="dateModel" [inline]="true" [minDate]="dateMin" [maxDate]="dateMax"
                 (onSelect)="onSelect(fieldModel)"></p-calendar>
                 <h5>Bloques disponibles</h5>
-                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" optionLabel="initTime" [style]="{'width':'15rem'}"
-                emptyMessage="No hay horas disponibles"></p-listbox>
+                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" [style]="{'width':'15rem'}" emptyMessage="No hay horas disponibles">
+                    <ng-template let-schedule pTemplate="item">
+                        <div class="schedule-item">
+                            <div>{{schedule.initTime}} - {{schedule.finalTime}}</div>
+                        </div>
+                    </ng-template>
+                </p-listbox>
                 <ng-template pTemplate="footer">
                     <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
                     <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>
