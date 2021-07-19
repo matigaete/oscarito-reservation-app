@@ -3,10 +3,11 @@ import { Field } from "./field";
 import { Payment } from "./payment";
 import { StateReservation } from "./reservation-state";
 import { Schedule } from "./schedule";
+import { User } from "./user";
 
 export interface Reservation {
     idReservation?: number,
-    idUser: number,
+    user: User,
     date: Date,
     idBlock: number | undefined,
     field?: Field | undefined,

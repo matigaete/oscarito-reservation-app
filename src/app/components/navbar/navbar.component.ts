@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { ConfirmationService, Message } from 'primeng/api';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { UserService } from 'src/app/Services/user/user.service';
+import { User } from 'src/app/Interface/user';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   checked : boolean = false;
   perfilDialog : boolean = false;
-  userConnect: any;
+  userConnect: User = {};
 
   //Items para menubar
   items: MenuItem[] = [];
@@ -24,12 +25,13 @@ export class NavbarComponent implements OnInit {
               private userService: UserService,
               private confirmationService: ConfirmationService,
               private router: Router) {
-
   }
 
   ngOnInit(): void {
+    if (this.authService.getLocalUser() !== undefined){
+      this.userConnect = this.authService.getLocalUser()!;
+    }
     this.armarMenu();
-    this.userConnect = this.authService.getLocalUser();
   }
 
   armarMenu(){
@@ -41,8 +43,14 @@ export class NavbarComponent implements OnInit {
         visible: this.authService.isAuthenticated(),
         items: [
           {label: 'Solicitar', routerLink: ['/reservar']},
-          {label: 'Ver', routerLink: ['/verReservas']} 
+          {label: 'Ver', routerLink: ['/verReservas'], visible: this.authService.isAuthenticated() && this.userConnect.userType!.idUserType! !== 2} 
         ]
+      },
+      {
+        label: 'CheckIn', 
+        icon: 'pi pi-fw pi-calendar-times',
+        routerLink: ['/checkin'],
+        visible: (this.authService.isAuthenticated() && this.userConnect.userType!.idUserType! === 2)     
       },
       {
           label: 'Mi cuenta',
@@ -90,7 +98,7 @@ export class NavbarComponent implements OnInit {
 
   hideDialog(){
     this.perfilDialog = false;
-    this.userConnect = this.authService.getLocalUser();
+    this.userConnect = this.authService.getLocalUser()!;
   }
 
   reload(){

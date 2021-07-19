@@ -16,6 +16,10 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${this.url}reservation/list/{idUser}?idUser=${idUser}`);
   }
 
+  public getReservationByDate(date: string) {
+    return this.http.get<Reservation[]>(`${this.url}reservation/list/date/{fecha}?fecha=${date}`);
+  }
+
   public addReservation(reservation: Reservation) {
     return this.http.post(`${this.url}reservation/add`, reservation);
   }

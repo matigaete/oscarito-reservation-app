@@ -21,6 +21,7 @@ export class ListReservationComponent implements OnInit {
   schedules: Schedule[] = [];
   scheduleModel: Schedule;
   reservationDialog: boolean = false;
+  payDialog: boolean = false;
   reservationSelected: any;
 
   constructor(private reservationService: ReservationService,
@@ -83,9 +84,13 @@ export class ListReservationComponent implements OnInit {
     this.reload();
   }
 
-  hideDialog(){
+  hideReservationDialog(){
     this.schedules = [];
     this.reservationDialog = false;
+  }
+
+  showPayDialog(reservation: Reservation){
+    this.payDialog = true;
   }
 
   reload(){

@@ -1,0 +1,26 @@
+<p-card>
+
+    <ng-template pTemplate="header">  
+        <div class="p-grid">       
+            <div class="p-col-12">
+                <span>Monto a cancelar: {{ reservation.field?.amount || "0" | currency:'CLP':'symbol-narrow':'1.0-0' }}</span>    
+            </div>
+            <div class="p-col-12">
+                <span>Seleccione un método de pago</span>
+            </div>
+        </div>
+    </ng-template>    
+
+    <div class="p-grid">       
+        <div class="p-col-6">
+            <button pButton type="button" label="Débito" icon="pi pi-wallet" class="p-button-help" *ngIf="showAllMethod" (click)="pay('débito')"></button>
+        </div>
+        <div class="p-col-6">
+            <button pButton type="button" label="Crédito" icon="pi pi-credit-card" class="p-button-help" *ngIf="showAllMethod" (click)="pay('crédito')"></button>
+        </div>
+        <div class="p-col-6">
+            <button pButton type="button" label="Efectivo" icon="pi pi-money-bill" class="p-button-help" *ngIf="showAllMethod" (click)="pay('efectivo')"></button>
+        </div>
+    </div>
+    
+</p-card>
