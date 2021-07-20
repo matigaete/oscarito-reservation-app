@@ -1,7 +1,7 @@
 <p-card>
 
     <ng-template pTemplate="header">  
-        <div class="p-grid">       
+        <div class="p-grid" *ngIf="isPayOk === false">       
             <div class="p-col-12">
                 <span>Monto a cancelar: {{ reservation.field?.amount || "0" | currency:'CLP':'symbol-narrow':'1.0-0' }}</span>    
             </div>
@@ -9,18 +9,31 @@
                 <span>Seleccione un método de pago</span>
             </div>
         </div>
+
+        <div class="p-grid" *ngIf="isPayOk === true">
+            <div class="p-col-12 p-text-center p-text-bold">
+                Transacción exitosa!
+            </div>
+        </div>
+
+        
     </ng-template>    
 
-    <div class="p-grid">       
-        <div class="p-col-6">
-            <button pButton type="button" label="Débito" icon="pi pi-wallet" class="p-button-help" *ngIf="showAllMethod" (click)="pay('débito')"></button>
+    <div class="p-grid" *ngIf="isPayOk === false">       
+        <div class="p-col-6" *ngIf="showAllMethod">
+            <button pButton type="button" label="Débito" icon="pi pi-wallet" class="p-button-help" (click)="confirmPay('débito')"></button>
         </div>
-        <div class="p-col-6">
-            <button pButton type="button" label="Crédito" icon="pi pi-credit-card" class="p-button-help" *ngIf="showAllMethod" (click)="pay('crédito')"></button>
+        <div class="p-col-6" *ngIf="showAllMethod">
+            <button pButton type="button" label="Crédito" icon="pi pi-credit-card" class="p-button-help" (click)="confirmPay('crédito')"></button>
         </div>
-        <div class="p-col-6">
-            <button pButton type="button" label="Efectivo" icon="pi pi-money-bill" class="p-button-help" *ngIf="showAllMethod" (click)="pay('efectivo')"></button>
+        <div class="p-col-6" *ngIf="showAllMethod">
+            <button pButton type="button" label="Efectivo" icon="pi pi-money-bill" class="p-button-help" (click)="confirmPay('efectivo')"></button>
         </div>
     </div>
     
+    <div class="p-grid" *ngIf="isPayOk === true">        
+        <div class="p-col-12">
+            <button pButton type="button" label="Cerrar" class="p-button-secondary" *ngIf="showAllMethod" (click)="closeDialog()"></button>
+        </div>
+    </div>    
 </p-card>

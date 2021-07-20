@@ -27,23 +27,34 @@
             <!-- Modal disponibilidad -->
             <p-dialog header="Disponibilidad" [(visible)]="display" [style]="{width: '50vw'}"
                 [baseZIndex]="10000"> 
-                <p-calendar [(ngModel)]="dateModel" [inline]="true" [minDate]="dateMin" [maxDate]="dateMax"
-                (onSelect)="onSelect(fieldModel)"></p-calendar>
-                <h5>Bloques disponibles</h5>
-                <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" [style]="{'width':'15rem'}" emptyMessage="No hay horas disponibles">
-                    <ng-template let-schedule pTemplate="item">
-                        <div class="schedule-item">
-                            <div>{{schedule.initTime}} - {{schedule.finalTime}}</div>
-                        </div>
-                    </ng-template>
-                </p-listbox>
+
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <h5>Selección de día</h5>
+                        <p-calendar [(ngModel)]="dateModel" [inline]="true" [minDate]="dateMin"  [maxDate]="dateMax"
+                        (onSelect)="onSelect(fieldModel)"></p-calendar>
+                    </div>
+                    <div class="p-col-6">
+                        <h5>Horarios disponibles</h5>
+
+                        <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" emptyMessage="No hay horas disponibles" >
+                            <ng-template let-schedule pTemplate="item">
+                                <div class="schedule-item">
+                                    <div>{{schedule.initTime}} - {{schedule.finalTime}}</div>
+                                </div>
+                            </ng-template>
+                        </p-listbox>
+
+                    </div>
+                </div>
+                
                 <ng-template pTemplate="footer">
                     <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
                     <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>
                 </ng-template>
             </p-dialog>
             <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-            <p-messages [value]="msgs" [style]="{width: '20vw'}"></p-messages>
+            <p-toast position="top-right"></p-toast>
         </div>
     </div>
     <div class="p-col">

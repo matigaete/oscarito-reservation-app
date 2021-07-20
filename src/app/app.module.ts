@@ -14,6 +14,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
 import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -22,6 +23,7 @@ import { TableModule } from 'primeng/table';
 import { DividerModule } from 'primeng/divider';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -64,6 +66,7 @@ import { PagoComponent } from './components/pago/pago.component';
     FormsModule,
     ListboxModule,
     MessagesModule,
+    ToastModule,
     ConfirmDialogModule,
     MenubarModule,
     ProgressSpinnerModule,
@@ -72,6 +75,7 @@ import { PagoComponent } from './components/pago/pago.component';
     DividerModule,
     InputSwitchModule,
     TooltipModule,
+    DropdownModule,
     APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService, MessageService],

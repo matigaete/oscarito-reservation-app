@@ -30,7 +30,7 @@
                 <td>{{reservation.state.description}}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-wallet" class="p-button-rounded p-button-success p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Pagar" (click)="showPayDialog(reservation)"></button>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Editar" (click)="editReservation(reservation)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Editar" (click)="showReservationDialog(reservation)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Anular" (click)="cancelReservation(reservation)"></button>
                 </td>
             </tr>
@@ -51,30 +51,50 @@
 </p-card>
 
 <p-dialog [(visible)]="reservationDialog" [style]="{width: '450px'}" header="Modificar bloque horario" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <h5>Bloque actual</h5>
-        {{reservationSelected.schedule.initTime}} - {{reservationSelected.schedule.finalTime}}
-        <p-divider></p-divider>
-        <h5>Bloques disponibles</h5>
-        <p-listbox [options]="schedules" [(ngModel)]="scheduleModel" [style]="{'width':'15rem'}" emptyMessage="No hay horas disponibles">
-            <ng-template let-schedule pTemplate="item">
-                <div class="schedule-item">
-                    <div>{{schedule.initTime}} - {{schedule.finalTime}}</div>
-                </div>
-            </ng-template>
-        </p-listbox>
-    </ng-template>
+    <p-card>
+        <div class="p-grid">
+            <div class="p-col-6">
+                <h5>Actividad</h5>
+                {{reservationSelected?.field.fieldType.name || "-"}}
+            </div>
+            <div class="p-col-6">
+                <h5>Bloque actual</h5>
+                {{reservationSelected?.schedule.initTime || "-"}} - {{reservationSelected?.schedule.finalTime || "-"}}
+            </div>
+        </div>      
+
+        
+    </p-card>
+    <p-divider></p-divider>
+    <h5>Bloques disponibles</h5>
+    <p-dropdown [options]="schedules" [(ngModel)]="scheduleModel" optionLabel="finalTime" 
+    [ngClass]="errorSchedule ? 'ng-invalid ng-dirty' : ''" emptyMessage="No hay horas disponibles" 
+    placeholder="Selecciona un nuevo horario" appendTo="body" (onChange)="onChangeDropdown()">
+        <ng-template pTemplate="selectedItem">
+            <div class="schedule-item schedule-item-value" *ngIf="scheduleModel">
+                <div>{{scheduleModel.initTime || "-" }} - {{scheduleModel.finalTime || "-" }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-schedule pTemplate="item">
+            <div class="schedule-item">
+                <div>{{schedule.initTime || "-" }} - {{schedule.finalTime || "-" }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideReservationDialog()"></button>
         <button pButton pRipple label="Modificar" icon="pi pi-check" class="p-button-text" (click)="saveNewScheduleForReservation()"></button>
     </ng-template>
-</p-dialog>
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</p-dialog>
 
 <p-dialog [(visible)]="payDialog" [style]="{width: '450px'}" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="header">
         <span><i class="pi pi-shield" style="font-size: 1rem"></i> Pago seguro</span>
     </ng-template>
-    <app-pago></app-pago>
+    <app-pago [reservation]="selectedReservation" (closeModalEvent)="hidePaymentDialog($event);"></app-pago>
 </p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="top-right"></p-toast>

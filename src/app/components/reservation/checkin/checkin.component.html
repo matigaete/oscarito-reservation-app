@@ -31,8 +31,8 @@
                 <td>{{ (reservation.payment !== null) ? reservation.payment.method : "sin pago"}}</td>
                 <td>{{reservation.state.description}}</td>
                 <td>
-                    <button pButton pRipple icon="pi pi-wallet" class="p-button-rounded p-button-success p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 1" pTooltip="Pagar" (click)="showPayDialog(reservation)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Anular"></button>
+                    <button pButton pRipple icon="pi pi-wallet" class="p-button-rounded p-button-success p-mr-2" *ngIf="reservation.payment === null && reservation.state.idState !== 2 && reservation.state.idState !== 1" pTooltip="Pagar" (click)="showPayDialog(reservation)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" *ngIf="reservation.payment === null && reservation.state.idState !== 2" pTooltip="Anular" (click)="cancelReservation(reservation)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -55,5 +55,8 @@
     <ng-template pTemplate="header">
         <span><i class="pi pi-shield" style="font-size: 1rem"></i> Pago seguro</span>
     </ng-template>
-    <app-pago [reservation]="selectedReservation"></app-pago>
+    <app-pago [reservation]="selectedReservation" (closeModalEvent)="hidePaymentDialog($event);"></app-pago>
 </p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="top-right"></p-toast>

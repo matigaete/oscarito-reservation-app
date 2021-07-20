@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, Message } from 'primeng/api';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Field } from 'src/app/Interface/field';
 import { Reservation } from 'src/app/Interface/reservation';
@@ -18,7 +18,6 @@ import { ScheduleService } from 'src/app/Services/schedule.service';
 export class AddReservationComponent implements OnInit {
 
   user: User = {};
-  msgs: Message[] = [];
   fields$: Observable<Field[]>;
   schedules$: Observable<Schedule[]> | undefined;
   schedules: Schedule[] = [];
@@ -36,7 +35,8 @@ export class AddReservationComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private fieldService: FieldService,
     private scheduleService: ScheduleService,
-    private reservartionService: ReservationService) {
+    private reservartionService: ReservationService,
+    private messageService: MessageService) {
 
     this.fields$ = this.fieldService.getFields();    
     this.dateMax.setDate(this.dateMin.getDate() + 7); 
@@ -58,6 +58,10 @@ export class AddReservationComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Aceptar',
       accept: () => {
+        if(this.scheduleModel === undefined){
+          this.messageService.add({severity:'error', summary:'Horario', detail:`No se ha seleccionado un bloque de horario.`, life: 3000});
+          return;
+        }
         this.display = false;
         this.reservationModel = {
           idReservation : 0,
@@ -71,10 +75,7 @@ export class AddReservationComponent implements OnInit {
         this.scheduleModel.available = false;
         this.reservartionService.addReservation(this.reservationModel).subscribe(() => {
           this.scheduleService.updateSchedule(this.scheduleModel).subscribe(() => {
-            this.msgs = [{
-              severity: 'success', summary: 'Hora confirmada',
-              detail: `Se ha realizado la reserva a las ${this.scheduleModel.initTime} hasta las ${this.scheduleModel.finalTime}`
-            }];
+            this.messageService.add({severity:'success', summary:'Reserva confirmada', detail:`Se ha realizado una reserva desde las ${this.scheduleModel.initTime} hasta las ${this.scheduleModel.finalTime}`, life: 3000});
           });
         });
       }
