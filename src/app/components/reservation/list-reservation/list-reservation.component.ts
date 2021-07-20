@@ -21,7 +21,10 @@ export class ListReservationComponent implements OnInit {
   schedules: Schedule[] = [];
   scheduleModel: Schedule;
   reservationDialog: boolean = false;
+  payDialog: boolean = false;
   reservationSelected: any;
+  selectedReservation: Reservation = { user : {}, date: new Date(), idBlock: 0 };
+  errorSchedule: boolean = false;
 
   constructor(private reservationService: ReservationService,
               private scheduleService: ScheduleService,
@@ -31,8 +34,6 @@ export class ListReservationComponent implements OnInit {
               private router: Router) {
       this.scheduleModel = this.schedules[1];
     }
-
-  
 
   ngOnInit(): void {
     this.findReservations();
@@ -52,49 +53,72 @@ export class ListReservationComponent implements OnInit {
 
   cancelReservation(reservation: Reservation){
     this.confirmationService.confirm({
-      message: '¿Segur@ quieres anular esta reserva?',
+      message: '¿Deseas cancelar la reserva?',
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
           this.reservationService.cancelReservation(reservation).subscribe();
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
-          this.reload();
+          reservation.state = { idState: 2, description: 'Anulado' }
+          this.messageService.add({severity:'info', summary:'Cambios en tu reserva', detail:'Hemos anulado la reserva seleccionada', life: 3000});
       }
     });    
   }
 
-  editReservation(reservation: Reservation) {
+  showReservationDialog(reservation: Reservation) {
     this.reservationSelected = {...reservation};
     let dateString = reservation.schedule!.date!.toString();
     this.scheduleService.getSchedules(reservation.field?.idField, dateString!)
     .subscribe((value) => {
       this.schedules = value;
     });
-
     this.reservationDialog = true;
   }  
 
   saveNewScheduleForReservation(){
-    let reservationToUpdate: Reservation = this.reservationSelected; 
-    reservationToUpdate.idBlock = this.scheduleModel.idSchedule;this.reservationService.updateReservation(reservationToUpdate).subscribe();
+    this.errorSchedule = false;
+    this.confirmationService.confirm({
+      message: `¿Proseguir con el cambio de horario?`,
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Aceptar',
+      accept: () => {
+        if(this.scheduleModel === undefined){
+          this.messageService.add({severity:'error', summary:'Horario', detail:`No se ha seleccionado un bloque de horario.`, life: 3000});
+          this.errorSchedule = true;
+          return;
+        }
+
+        this.reservationSelected.idBlock = this.scheduleModel.idSchedule;  
+        this.reservationSelected.schedule = this.scheduleModel;
+        this.reservationService.updateReservation(this.reservationSelected)
+                                .subscribe();
+        this.messageService.add({severity:'success', summary:'Reserva modificada', detail:`Se ha modificado el horario de la reserva: ${this.scheduleModel.initTime} hasta las ${this.scheduleModel.finalTime}`, life: 3000});
+        this.reservationSelected = null;
+        this.schedules = [];
+        this.reservationDialog = false;
+      }
+    });
+  }
+
+  onChangeDropdown(){
+    this.errorSchedule = false;
+  }
+
+  hideReservationDialog(){
+    this.scheduleModel = { idSchedule: 0  };
     this.reservationSelected = null;
-    this.schedules = [];
-    this.reservationDialog = false;
-    this.reload();
-  }
-
-  hideDialog(){
+    this.errorSchedule = false;
     this.schedules = [];
     this.reservationDialog = false;
   }
 
-  reload(){
-    setTimeout(() => {
-      window.location.hash = '';
-      this.router.navigateByUrl('/verReservas').then(() => {
-        window.location.reload();
-      });
-    }, 0);
+  showPayDialog(reservation: Reservation){
+    this.selectedReservation = reservation;
+    this.payDialog = true;
+  }
+
+  hidePaymentDialog(status: boolean){
+    this.payDialog = false;
   }
 
 }

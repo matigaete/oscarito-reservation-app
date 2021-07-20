@@ -14,6 +14,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ListboxModule } from 'primeng/listbox';
 import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -21,13 +22,13 @@ import { BlockUIModule } from 'primeng/blockui';
 import { TableModule } from 'primeng/table';
 import { DividerModule } from 'primeng/divider';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { AddReservationComponent } from './components/reservation/add-reservation/add-reservation.component';
-import { CancelReservationComponent } from './components/reservation/cancel-reservation/cancel-reservation.component';
-import { UpdateReservationComponent } from './components/reservation/update-reservation/update-reservation.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListReservationComponent } from './components/reservation/list-reservation/list-reservation.component';
@@ -35,6 +36,8 @@ import { ListReservationComponent } from './components/reservation/list-reservat
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { CheckinComponent } from './components/reservation/checkin/checkin.component';
+import { PagoComponent } from './components/pago/pago.component';
 
 
 
@@ -42,13 +45,13 @@ import { MessageService } from 'primeng/api';
   declarations: [
     AppComponent,
     AddReservationComponent,
-    CancelReservationComponent,
-    UpdateReservationComponent,
     ImageResourcePipe,
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    ListReservationComponent
+    ListReservationComponent,
+    CheckinComponent,
+    PagoComponent
   ],
   imports: [
     HttpClientModule,
@@ -63,6 +66,7 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     ListboxModule,
     MessagesModule,
+    ToastModule,
     ConfirmDialogModule,
     MenubarModule,
     ProgressSpinnerModule,
@@ -70,6 +74,8 @@ import { MessageService } from 'primeng/api';
     TableModule,
     DividerModule,
     InputSwitchModule,
+    TooltipModule,
+    DropdownModule,
     APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService, MessageService],
