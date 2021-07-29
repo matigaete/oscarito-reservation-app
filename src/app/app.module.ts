@@ -32,14 +32,13 @@ import { AddReservationComponent } from './components/reservation/add-reservatio
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListReservationComponent } from './components/reservation/list-reservation/list-reservation.component';
+import { CheckinComponent } from './components/reservation/checkin/checkin.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { AdministratorUserTypeComponent } from './components/administrator-user-type/administrator-user-type.component';
 /* SERVICIOS */
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import { CheckinComponent } from './components/reservation/checkin/checkin.component';
-import { PagoComponent } from './components/pago/pago.component';
-
-
 
 @NgModule({
   declarations: [
@@ -51,7 +50,8 @@ import { PagoComponent } from './components/pago/pago.component';
     NavbarComponent,
     ListReservationComponent,
     CheckinComponent,
-    PagoComponent
+    PagoComponent,
+    AdministratorUserTypeComponent
   ],
   imports: [
     HttpClientModule,

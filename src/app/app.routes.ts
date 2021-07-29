@@ -1,4 +1,5 @@
 import {RouterModule, Routes} from '@angular/router';
+import { AdministratorUserTypeComponent } from './components/administrator-user-type/administrator-user-type.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PagoComponent } from './components/pago/pago.component';
@@ -15,6 +16,7 @@ const APP_ROUTES: Routes = [
     {path: 'verReservas', component: ListReservationComponent, canActivate: [AuthGuard]},  
     {path: 'checkin', component: CheckinComponent, canActivate: [AuthGuard]},
     {path: 'pago', component: PagoComponent, canActivate: [AuthGuard]},
+    {path: 'admin/userType', component: AdministratorUserTypeComponent, canActivate: [AuthGuard]},
     {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 
