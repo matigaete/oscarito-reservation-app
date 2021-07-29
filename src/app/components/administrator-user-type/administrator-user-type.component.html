@@ -1,0 +1,73 @@
+<div class="card">
+    <p-table [value]="userTypes" dataKey="idUserType" editMode="row">
+        <ng-template pTemplate="caption">
+            <div class="p-ai-center p-jc-between">
+
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <h5 class="p-m-0">Administrar tipos de usuario</h5>
+                    </div>
+                    <div class="p-col-1 p-offset-5">
+                        <button pButton pRipple label="Nuevo" icon="pi pi-plus" (click)="onClickAddNewType();" class="p-button-success p-mr-2"></button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Identificador</th>
+                <th>Descipción</th>
+                <th style="width:8rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-type let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="type">
+                <td>
+                    {{type.idUserType}}
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="type.description" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{type.description}}
+                        </ng-template>
+                    </p-cellEditor>  
+                </td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(type)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(type, ri)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(type, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="addTypeDialog" [style]="{width: '450px'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="header">
+        Nuevo tipo de usuario
+    </ng-template>
+
+    <div class="p-grid">       
+        <div class="p-col-12">
+            <span>Identificador: {{ newUserType.idUserType }}</span>    
+        </div>
+        <div class="p-col-12">
+            <label for="txtDescription">Descripción</label>
+            <input id="txtDescription" pInputText type="text" [(ngModel)]="newUserType.description" required>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="onCancelAddType()"></button>
+        <button pButton pRipple label="Agregar" icon="pi pi-check" class="p-button-text" (click)="onSaveNewType()"></button>
+    </ng-template>
+
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="top-right"></p-toast>

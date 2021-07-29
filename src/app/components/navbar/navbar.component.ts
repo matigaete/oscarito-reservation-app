@@ -38,8 +38,16 @@ export class NavbarComponent implements OnInit {
     this.items = [
       {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/home']},
       {
+        label: 'Administrar', 
+        icon: 'pi pi-fw pi-pencil', 
+        visible: this.authService.isAuthenticated() && this.userConnect.userType!.idUserType! === 1,
+        items: [
+          {label: 'Tipos de usuario', routerLink: ['/admin/userType']},
+        ]
+      },
+      {
         label: 'Reserva', 
-        icon: 'pi pi-fw pi-pencil',
+        icon: 'pi pi-fw pi-calendar-times',
         visible: this.authService.isAuthenticated(),
         items: [
           {label: 'Solicitar', routerLink: ['/reservar']},
