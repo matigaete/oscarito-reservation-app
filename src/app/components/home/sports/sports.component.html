@@ -1,0 +1,20 @@
+<p-fieldset legend="Canchas" styleClass="max-height">
+    <div class="p-card">
+        <p-table [value]="fields" styleClass="p-datatable-gridlines">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Precio</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-field>
+                <tr>
+                    <td>{{field.fieldType.name}}</td>
+                    <td>{{field.fieldType.capacity}} personas</td>
+                    <td>{{field.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-fieldset>

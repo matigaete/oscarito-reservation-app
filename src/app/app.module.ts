@@ -24,6 +24,7 @@ import { DividerModule } from 'primeng/divider';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
+import { FieldsetModule } from 'primeng/fieldset';
 /* COMPONENTES */
 import { AppComponent } from './app.component';
 import { ImageResourcePipe } from './pipes/image-resource.pipe';
@@ -39,6 +40,9 @@ import { AdministratorUserTypeComponent } from './components/administrator-user-
 import { FieldService } from './Services/field.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { MainBannerComponent } from './components/home/main-banner/main-banner.component';
+import { SportsComponent } from './components/home/sports/sports.component';
+import { TournamentsComponent } from './components/home/tournaments/tournaments.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { MessageService } from 'primeng/api';
     ListReservationComponent,
     CheckinComponent,
     PagoComponent,
-    AdministratorUserTypeComponent
+    AdministratorUserTypeComponent,
+    MainBannerComponent,
+    SportsComponent,
+    TournamentsComponent
   ],
   imports: [
     HttpClientModule,
@@ -76,6 +83,7 @@ import { MessageService } from 'primeng/api';
     InputSwitchModule,
     TooltipModule,
     DropdownModule,
+    FieldsetModule,
     APP_ROUTING
   ],
   providers: [FieldService, ConfirmationService, MessageService],
