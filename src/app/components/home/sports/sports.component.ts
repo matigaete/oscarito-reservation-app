@@ -21,7 +21,6 @@ export class SportsComponent implements OnInit {
     this.fieldService.getFields()
                       .subscribe((value:any) => {
                         this.fields = value;
-                        console.log(this.fields);
                       });
   }
 

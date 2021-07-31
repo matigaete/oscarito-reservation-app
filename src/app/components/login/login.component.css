@@ -1,0 +1,11 @@
+.card-login{
+    position: relative;
+    top: 35%;
+    background-color: rgba(255,255,255,0.7);
+}
+.spinner{
+    position: relative;
+    top: 35%;
+    left: 43%;
+    z-index: 1000;
+}
