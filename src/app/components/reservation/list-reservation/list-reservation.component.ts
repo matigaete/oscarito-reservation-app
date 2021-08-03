@@ -93,6 +93,12 @@ export class ListReservationComponent implements OnInit {
         this.reservationService.updateReservation(this.reservationSelected)
                                 .subscribe();
         this.messageService.add({severity:'success', summary:'Reserva modificada', detail:`Se ha modificado el horario de la reserva: ${this.scheduleModel.initTime} hasta las ${this.scheduleModel.finalTime}`, life: 3000});
+        
+        // Permite actualizar la tabla
+        let reservationUpdateArray = this.reservations.find(f => f.idReservation === this.reservationSelected.idReservation);
+        let indexUpdate = this.reservations.indexOf(reservationUpdateArray!);
+        this.reservations[indexUpdate] = this.reservationSelected;
+        
         this.reservationSelected = null;
         this.schedules = [];
         this.reservationDialog = false;
