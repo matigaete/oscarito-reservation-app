@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/Interface/user';
 import { AuthService } from 'src/app/Services/auth/auth.service';
-import { Message } from 'primeng/api';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,15 +9,17 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-
-  constructor(public authService : AuthService,
-              private router : Router) { }
+export class LoginComponent {
 
   email : string = '';
   password : string = '';
   msgs: Message[] = [];
   blockedDocument: boolean = false;
+
+  constructor(public authService : AuthService,
+              private router : Router,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) { }
 
   ingresar(){
     this.blockedDocument = true;
@@ -26,10 +28,10 @@ export class LoginComponent{
     // Loguear    
     this.authService.login(user).subscribe(() => {
       if (!this.authService.isAuthenticated()){
-        this.msgs = [{ severity: 'error', summary: '', detail: 'Email o contraseña incorrectas' }];
+        this.messageService.add({severity:'error', summary:'', detail:'Email o contraseña incorrectas', life: 3000});
         this.blockedDocument = false;
       }else{
-        this.msgs = [{ severity: 'success', summary: '', detail: 'Acceso correcto' }];
+        this.messageService.add({severity:'success', summary:'', detail:'Acceso correcto', life: 3000});
         setTimeout(() => {
           this.blockedDocument = false;
           window.location.hash = '';

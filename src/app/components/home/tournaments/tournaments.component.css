@@ -1,0 +1,47 @@
+.content-sport-banner{
+    width: 100%;
+}
+.sport-banner{
+    width: 100%;
+    height: 159px;
+    position: relative;
+}
+.img-banner{
+    width: 100%;
+    height: 100%;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;
+    object-fit: fill;
+
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+.sport-banner:hover .img-banner {
+    opacity: 0.3;
+}
+
+.sport-banner:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    background-color: #04AA6D;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+}

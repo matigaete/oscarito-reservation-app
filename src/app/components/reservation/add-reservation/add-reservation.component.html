@@ -1,28 +1,34 @@
 <div class="p-grid p-flex-column">
-    <div class="p-col">
+    <div class="p-col-10 p-offset-1">
         <div class="box">
-            <div class="p-text-center" ><h2>Añadir reserva</h2></div>
-            <i class="pi pi-check"></i>
+            <div class="p-text-center"><h2>Solicitar reserva</h2></div>
         </div>
     </div>
-    <div class="p-col">
+    <div class="p-col-10 p-offset-1">
         <div class="p-grid">
-            <div class="p-col-3" *ngFor="let f of (fields$ | async)">
-                <div class="box box-stretched">
-                    <p-card header="{{f.fieldType?.name}}"
-                        subheader="{{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}" [style]="{width: '360px'}"
-                        styleClass="p-card-shadow">
-                        <ng-template pTemplate="header">
-                            <img alt="Card" src="{{ f.fieldType.idFieldType | imageResource }}" style="width: fit-content;">
-                        </ng-template>
-                        <ng-template pTemplate="footer">
-                            <!--Abrir modal disponibilidad-->
+            <div class="p-col-6" *ngFor="let f of (fields$ | async); let isOdd=odd">
+                <p-card styleClass="p-card-shadow box-sport">                    
+                    <div class="p-grid box-sport">
+                        <div class="p-col-4" style="height: 100%;">
+                            <img alt="Card" src="{{ f.fieldType.idFieldType | imageResource }}" class="img-sport">
+                        </div>
+                        <div class="p-col-4 p-as-center">
+                            <div class="p-card-title">
+                                {{f.fieldType?.name}}
+                            </div>
+        
+                            <div class="p-card-subtitle">
+                                {{f.amount | currency:'CLP':'symbol-narrow':'1.0-0'}}
+                            </div>
+                        </div>
+                        <div class="p-col-4 p-as-center">
                             <p-button (click)="showDialog(f)" label="Reservar" icon="pi pi-check-square"
-                                styleClass="p-button-secondary"></p-button>                            
-                        </ng-template>
-                    </p-card>
-                </div>
+                            styleClass="p-button-success"></p-button>
+                        </div>
+                    </div>
+                </p-card>
             </div>
+            
 
             <!-- Modal disponibilidad -->
             <p-dialog header="Disponibilidad" [(visible)]="display" [style]="{width: '50vw'}"
@@ -49,8 +55,8 @@
                 </div>
                 
                 <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
                     <p-button icon="pi pi-times" (click)="display=false" label="Cancelar" styleClass="p-button-text"></p-button>
+                    <p-button icon="pi pi-check" (click)="ngOnSubmit()" label="Reservar"></p-button>
                 </ng-template>
             </p-dialog>
             <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

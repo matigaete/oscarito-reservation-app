@@ -41,3 +41,19 @@ p {
 :host ::ng-deep .p-dialog .p-button {
     min-width: 6rem;
 }
+
+:host ::ng-deep .p-card .p-card-body {
+  padding: 0px;;
+}
+
+:host ::ng-deep .p-card .p-card-content {
+  padding: 0px;;
+}
+
+.img-sport{
+  height: 100%;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+
